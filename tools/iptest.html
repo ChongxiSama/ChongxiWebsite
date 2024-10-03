@@ -66,7 +66,7 @@
 </head>
 <body>
     <h1>您的IP信息</h1>
-    <p>测试可能需要30秒，请耐心等待</p>
+    <p>测试可能需要30s 请耐心等待</p>
     <div id="result"></div>
     <div class="progress"><div class="progress-bar" id="progressBar" data-percentage="0%"></div></div>
     
@@ -74,42 +74,37 @@
 
     <script>
         async function fetchIPInfo() {
-            const response = await fetch('https://ipinfo.io/json');
+            // 使用https://ip-api.com获取IP信息
+            const response = await fetch('https://ip-api.com/json/');
             const data = await response.json();
-            const ipAddress = data.ip;
-            const location = `${data.city}, ${data.region}, ${data.country}`;
-            const [latitude, longitude] = data.loc.split(',');
 
-            // DNS 查询
-            const dns = await fetchDNSInfo(ipAddress);
+            if (data.status === 'fail') {
+                document.getElementById('result').innerHTML = `<p>无法获取IP信息: ${data.message}</p>`;
+                return;
+            }
+
+            const ipAddress = data.query;
+            const dns = "未检测成功"; // DNS 查询已更换 API
+            const location = `${data.city}, ${data.regionName}, ${data.country}`;
+            const [latitude, longitude] = [data.lat, data.lon];
+            const isProxy = "不适用";
 
             document.getElementById('result').innerHTML = `
                 <p>您的IP地址: <strong>${ipAddress}</strong></p>
+                <p>DNS: <strong>${dns}</strong></p>
                 <p>对应归属地: <strong>${location}</strong></p>
                 <p>粗略纬度: <strong>${latitude}</strong>, 粗略经度: <strong>${longitude}</strong></p>
-                <p>DNS记录: <strong>${dns}</strong></p>
+                <p>代理检查: <strong>${isProxy}</strong></p>
             `;
 
             await testConnectivity();
-        }
-
-        async function fetchDNSInfo(domain) {
-            const response = await fetch(`https://dns.google/resolve?name=${domain}&type=A`);
-            const data = await response.json();
-            
-            if (data.Answer) {
-                const ipAddresses = data.Answer.map(record => record.data).join(', ');
-                return ipAddresses;
-            } else {
-                return "未检测到DNS记录";
-            }
         }
 
         async function testConnectivity() {
             const totalTests = 3;
             let completedTests = 0;
 
-            const ipv4Site = 'http://api.ipify.org'; // IPv4测试API
+            const ipv4Site = 'https://api.ipify.org'; // IPv4测试API
             const ipv6Site = 'https://api6.ipify.org'; // IPv6测试API
             const pingUrls = ['baidu.com', 'github.com', 'google.com', 'google.com.hk'];
 
@@ -170,14 +165,14 @@
         }
 
         function goToMainSite() {
-            window.location.href = 'https://chongxi.top';
+            window.location.href = 'chongxi.top';
         }
 
         fetchIPInfo();
     </script>
     
     <footer>
-        <p>Powered by <a href="https://ipinfo.io" target="_blank">ipinfo.io</a></p>
+        <p>Powered by <a href="https://ip-api.com" target="_blank">ip-api.com</a></p>
         <p>code by <a href="https://github.com/ChongxiSama/ChongxiWebsite" target="_blank">Chongxi</a></p>
     </footer>
 </body>
