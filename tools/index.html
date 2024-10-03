@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toolbox</title>
+    <style>
+        /* 设置背景字体 */
+        body {
+            font-family: 'MiSans', Arial, sans-serif; /* 自定字体 */
+            line-height: 1.6;
+            margin: 20px;
+            background-image: url('https://i.ibb.co/qrW7nyS/illust-105994602-20240828-111844.jpg');
+            background-size: cover; /* 覆盖 */
+            background-position: center; /* 居中 */
+            background-attachment: fixed; /* 固定 */
+            background-repeat: no-repeat; /* 防止重复 */
+            color: white; /* 字色 */
+        }
+
+        /* 高斯模糊 */
+        .content {
+            backdrop-filter: blur(10px); /* 高斯模糊 */
+            background-color: rgba(255, 255, 255, 0.1); /* 透明度 */
+            padding: 20px; /* 字边距 */
+            border-radius: 10px; /* 圆角 */
+        }
+
+        h1, h2 {
+            color: #fff; /* 标题色 */
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        a {
+            color: #4FC3F7; /* 链接色 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+
+        a:hover {
+            color: #0288D1; /* 鼠标悬停链接色 */
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2); /* 按钮背景色 */
+            color: white; /* 按钮字体颜色 */
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.4); /* 悬停效果 */
+        }
+
+        /* 定义字体 */
+        @font-face {
+            font-family: 'MiSans';
+            src: url('MiSans-Normal.ttf') format('truetype');
+        }
+
+        h1 {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>工具箱目录</h1>
+        <p>这里有一些小小的实用功能 可能不是很好用</p>
+        <hr>
+        <h2>索引</h2>
+        <ul>
+            <li><a href="https://chongxi.top/tools/iptest.html" class="button">IP信息</a></li>
+            <li><a href="chongxi.top" class="button">敬请期待</a></li>
+            <li><a href="chongxi.top" class="button">敬请期待</a></li>
+            <li><a href="chongxi.top" class="button">敬请期待</a></li>
+            <!-- 在这里添加更多工具链接 -->
+        </ul>
+        <hr>
+        <p><a href="https://chongxi.top" class="button">返回主站</a></p> <!-- 添加返回主站链接 -->
+    </div>
+</body>
+</html>
