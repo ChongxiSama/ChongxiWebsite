@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP信息</title>
+    <style>
+        @font-face {
+            font-family: 'Misans';
+            src: url('/fonts/Misans-Medium.woff') format('truetype');
+        }
+
+        body {
+            font-family: 'Misans', Arial, sans-serif;
+            background-image: url('https://i.ibb.co/qrW7nyS/illust-105994602-20240828-111844.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            backdrop-filter: blur(10px);
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            margin-top: 20px;
+        }
+        pre {
+            text-align: left;
+            display: inline-block;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 90%;
+            overflow: auto;
+        }
+        .progress {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-bar {
+            height: 20px;
+            background-color: #007BFF;
+            width: 0;
+            transition: width 0.4s;
+            position: relative;
+        }
+        .progress-bar::after {
+            content: attr(data-percentage);
+            position: absolute;
+            right: 5px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>您的IP信息</h1>
+    <p>测试可能需要30s 请耐心等待</p>
+    <div id="result"></div>
+    <div class="progress"><div class="progress-bar" id="progressBar" data-percentage="0%"></div></div>
+    
+    <button onclick="goToMainSite()">返回主站</button>
+
+    <script>
+        async function fetchIPInfo() {
+            const response = await fetch('http://ip-api.com/json');
+            const data = await response.json();
+            const ipAddress = data.query;
+            const dns = data.reverse ? data.reverse : "未检测成功";
+            const location = `${data.city}, ${data.regionName}, ${data.country}`;
+            const latitude = data.lat;
+            const longitude = data.lon;
+            const isProxy = data.proxy ? '是' : '否';
+
+            document.getElementById('result').innerHTML = `
+                <p>您的IP地址: <strong>${ipAddress}</strong></p>
+                <p>DNS: <strong>${dns}</strong></p>
+                <p>对应归属地: <strong>${location}</strong></p>
+                <p>粗略纬度: <strong>${latitude}</strong>, 粗略经度: <strong>${longitude}</strong></p>
+                <p>很不可靠的代理检查: <strong>${isProxy}</strong></p>
+            `;
+
+            await testConnectivity();
+        }
+
+        async function testConnectivity() {
+            const totalTests = 3;
+            let completedTests = 0;
+
+            const ipv4Site = 'http://api.ipify.org'; // IPv4测试API
+            const ipv6Site = 'https://api6.ipify.org'; // IPv6测试API
+            const pingUrls = ['baidu.com', 'github.com', 'google.com', 'google.com.hk'];
+
+            const ipv4Result = await checkConnectivity(ipv4Site);
+            completedTests++;
+            updateProgress(completedTests, totalTests);
+
+            const ipv6Result = await checkConnectivity(ipv6Site);
+            completedTests++;
+            updateProgress(completedTests, totalTests);
+
+            const pingResults = await pingTests(pingUrls);
+            completedTests++;
+            updateProgress(completedTests, totalTests);
+
+            const connectivityResult = `
+                <h2>IP协议测试结果:</h2>
+                <p>IPv4可访问: <strong>${ipv4Result ? '是' : '否'}</strong></p>
+                <p>IPv6可访问: <strong>${ipv6Result ? '是' : '否'}</strong></p>
+                <h3>Ping测试结果:</h3>
+                <pre>${pingResults}</pre>
+            `;
+
+            document.getElementById('result').innerHTML += connectivityResult;
+        }
+
+        function updateProgress(completed, total) {
+            const percentage = (completed / total) * 100;
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+            document.getElementById('progressBar').setAttribute('data-percentage', `${Math.round(percentage)}%`);
+        }
+
+        async function checkConnectivity(site) {
+            return await promiseWithTimeout(fetch(site, { method: 'GET' }), 10000);
+        }
+
+        async function promiseWithTimeout(promise, timeout) {
+            return Promise.race([
+                promise.then(response => response.ok),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('请求超时')), timeout))
+            ]).catch(() => false);
+        }
+
+        async function pingTests(urls) {
+            const results = [];
+            for (const url of urls) {
+                const latency = await measureLatency(url);
+                results.push(`${url}: ${latency}`);
+            }
+            return results.join('\n');
+        }
+
+        async function measureLatency(url) {
+            const startTime = performance.now();
+            const result = await promiseWithTimeout(fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://' + url)}`, { method: 'GET' }), 10000);
+            const endTime = performance.now();
+            return result ? `${Math.round(endTime - startTime)} ms` : '超时';
+        }
+
+        function goToMainSite() {
+            window.location.href = 'chongxi.top';
+        }
+
+        fetchIPInfo();
+    </script>
+    
+    <footer>
+        <p>Powered by <a href="http://ip-api.com" target="_blank">ip-api.com</a></p>
+        <p>code by <a href="https://github.com/ChongxiSama/ChongxiWebsite" target="_blank">Chongxi</a></p>
+    </footer>
+</body>
+</html>
