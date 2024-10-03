@@ -77,12 +77,14 @@
             const response = await fetch('https://ipinfo.io/json');
             const data = await response.json();
             const ipAddress = data.ip;
+            const dns = data.hostname ? data.hostname : "未检测成功";
             const location = `${data.city}, ${data.region}, ${data.country}`;
             const [latitude, longitude] = data.loc.split(',');
-            const isProxy = "不可用";
+            const isProxy = "不适用";
 
             document.getElementById('result').innerHTML = `
                 <p>您的IP地址: <strong>${ipAddress}</strong></p>
+                <p>DNS: <strong>${dns}</strong></p>
                 <p>对应归属地: <strong>${location}</strong></p>
                 <p>粗略纬度: <strong>${latitude}</strong>, 粗略经度: <strong>${longitude}</strong></p>
                 <p>代理检查: <strong>${isProxy}</strong></p>
