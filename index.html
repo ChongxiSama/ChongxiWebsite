@@ -49,6 +49,24 @@
             color: #0288D1;
         }
 
+        /* 按钮样式 */
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2); /* 按钮背景色 */
+            color: white; /* 按钮字体颜色 */
+            text-decoration: none; /* 去掉下划线 */
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.4); /* 悬停效果 */
+        }
+
         /* 隐藏未使用的内容模块 */
         .hidden {
             display: none;
@@ -63,7 +81,8 @@
 
     <h1>引导链接</h1>
     <ul>
-        <li>个人blog: <a href="https://chongxi.top/blog/index.html">目录</a></li>
+        <li>个人blog: <a href="https://chongxi.top/blog/index.html" class="button">目录</a></li>
+        <li>工具箱: <a href="https://chongxi.top/tools/index.html" class="button">打开工具箱</a></li> <!-- 新增工具箱按钮 -->
     </ul>
 
     <hr>
