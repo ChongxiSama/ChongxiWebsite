@@ -78,9 +78,17 @@
             const data = await response.json();
             const ipAddress = data.ip;
             const dns = data.hostname ? data.hostname : "未检测成功";
-            const location = `${data.city}, ${data.region}, ${data.country}`;
-            const [latitude, longitude] = data.loc.split(',');
+            let location = `${data.city}, ${data.region}, ${data.country}`;
+            let latitude = '未知';
+            let longitude = '未知';
             const isProxy = "不适用";
+
+            // 如果归属地为中国，只显示“中国”，且经纬度显示“未知”
+            if (data.country === 'CN') {
+                location = '中国';
+            } else {
+                [latitude, longitude] = data.loc.split(',');
+            }
 
             document.getElementById('result').innerHTML = `
                 <p>您的IP地址: <strong>${ipAddress}</strong></p>
@@ -99,7 +107,7 @@
 
             const ipv4Site = 'http://api.ipify.org'; // IPv4测试API
             const ipv6Site = 'https://api6.ipify.org'; // IPv6测试API
-            const pingUrls = ['baidu.com', 'github.com', 'google.com', 'google.com.hk'];
+            const pingUrls = ['cn.bing.com', 'github.com', 'google.com', 'google.com.hk'];
 
             const ipv4Result = await checkConnectivity(ipv4Site);
             completedTests++;
