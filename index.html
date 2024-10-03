@@ -5,94 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chongxiの个人站</title>
     <style>
+        /* 字体定义 */
+        @font-face {
+            font-family: 'MiSans';
+            src: url('/fonts/MiSans-Normal.woff') format('woff');
+        }
+
+        /* 全局样式 */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'MiSans', sans-serif;
             line-height: 1.6;
             margin: 20px;
-            background-image: url('https://i.ibb.co/qrW7nyS/illust-105994602-20240828-111844.jpg');
-            background-size: cover; /* 覆盖页面 */
-            background-position: center; /* 居中 */
-            background-attachment: fixed; /* 背景固定 */
-            background-repeat: no-repeat; /* 防止重复 */
-            color: white; /* 色号 */
+            background: url('https://i.ibb.co/qrW7nyS/illust-105994602-20240828-111844.jpg') center/cover fixed no-repeat;
+            color: white;
         }
 
-        /* 高斯模糊设定 */
+        /* 内容容器样式 */
         .content {
-            backdrop-filter: blur(10px); /* 高斯模糊 */
-            background-color: rgba(255, 255, 255, 0.1); /* 背景透明度 */
-            padding: 20px; /* 字内边距 */
-            border-radius: 10px; /* 圆角 */
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px; /* 保持圆角 */
         }
 
+        /* 标题样式 */
         h1, h2 {
-            color: #fff; /* 标题色 */
+            color: #fff;
+            font-weight: bold;
         }
 
+        /* 列表样式 */
         ul {
             list-style-type: none;
             padding-left: 0;
         }
 
+        /* 链接样式 */
         a {
-            color: #4FC3F7; /* 链接字色 */
+            color: #4FC3F7;
         }
 
         a:hover {
-            color: #0288D1; /* 鼠标悬停时链接颜色 */
+            color: #0288D1;
+        }
+
+        /* 隐藏未使用的内容模块 */
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-  <style>
-    /*字体*/
-    @font-face {
-      font-family: 'MiSans';
-      src: url('/fonts/MiSans-Normal.woff') format('truetype');
-    }
-
-    body {
-      font-family: 'MiSans', sans-serif;
-      margin: 20px;
-    }
-
-    h1 {
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-
 <div class="content">
     <h1>这里是Chongxiの个人站!</h1>
-    <p>本人能力有限 目前仅会基础的html 后续会逐步学习 有问题欢迎各位大佬指出<p>
-    <h1>引导链接
-    <li>个人blog:<a href="https://chongxi.top/blog/index.html">目录</a></li>
+    <p>本人能力有限 目前仅会基础的html 后续会逐步学习 有问题欢迎各位大佬指出</p>
+
+    <h1>引导链接</h1>
+    <ul>
+        <li>个人blog: <a href="https://chongxi.top/blog/index.html">目录</a></li>
+    </ul>
 
     <hr>
 
     <h2>== 关于Chongxi ==</h2>
-
     <ul>
         <li><strong>重熙</strong> - <strong>Chongxi</strong></li>
         <li><strong>性别</strong>: 未透露</li>
         <li><strong>外貌</strong>: 据Chongxi朋友的形容为「瘦长鬼影」</li>
-        <li><strong>爱好</strong>: 较为广泛 对计算机科学 电气学 物理学 地理学 史政等有浓厚兴趣 对电音各曲风有所了解 <del>二次元浓度并不算很高</del></li>
-        <li><strong>游戏偏好</strong>: 主要以单机游戏为主 对音乐游戏也有涉及 <em>具体实在太多太杂干脆列举几个出来罢</em>
+        <li><strong>爱好</strong>: 计算机科学，电气学，物理学等</li>
+        <li><strong>游戏偏好</strong>:
             <ul>
-                <li>Minecraft, Terraria为代表的沙盒游戏</li>
-                <li>塞尔达传说系列与GTA系列为代表的开放世界游戏</li>
-                <li><del>CSGO</del>, 战地系列为代表的FPS游戏</li>
-                <li>坦克世界, 战争雷霆为代表的MOBA(?)游戏</li>
-                <li>钢铁雄心4, 群星为代表的历史战略</li>
-                <li>星露谷物语为代表的模拟农场经营</li>
-                <li>废墟图书馆为代表的回合制策略</li>
-                <li>红色警戒为代表的RTS游戏</li>
-                <li>以碧蓝档案为代表的二游</li>
-                <li>还有什么微软模拟飞行一类的</li>
+                <li>Minecraft, Terraria</li>
+                <li>塞尔达传说, GTA系列</li>
+                <li>CSGO, 战地系列</li>
+                <li>坦克世界, 战争雷霆</li>
+                <li>钢铁雄心4, 群星</li>
+                <li>星露谷物语</li>
+                <li>废墟图书馆, 红色警戒</li>
             </ul>
-            <del>实在是太多了就不继续讲了</del>
         </li>
     </ul>
 
@@ -108,12 +99,6 @@
         <li><strong>Outlook</strong>: chongxiace666@outlook.com</li>
         <li><strong>QQ邮箱</strong>: 2623993663@qq.com</li>
     </ul>
-
-    <h2>== 关于CEPATO ==</h2>
-    <p>无档案</p>
-
-    <h2>== 关于xi ==</h2>
-    <p>无档案</p>
 
     <hr>
 
