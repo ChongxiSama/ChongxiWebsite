@@ -13,7 +13,7 @@
             backdrop-filter: blur(10px);
             margin: 0;
             padding: 20px;
-            text-align: center;
+            text-align: left;
             color: white;
         }
         button {
@@ -23,11 +23,11 @@
             cursor: pointer;
             border: none;
             border-radius: 5px;
-            background-color: #007BFF;
+            background-color: #39C5BB;
             color: white;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #31A19A;
         }
         footer {
             margin-top: 20px;
@@ -51,7 +51,7 @@
         }
         .progress-bar {
             height: 20px;
-            background-color: #007BFF;
+            background-color: #39C5BB;
             width: 0;
             transition: width 0.4s;
             position: relative;
@@ -65,7 +65,7 @@
     </style>
 </head>
 <body>
-    <h1>您的IP信息</h1>
+    <h1 style="color: #39C5BB;">您的IP信息</h1>
     <p>测试可能需要30s 请耐心等待</p>
     <div id="result"></div>
     <div class="progress"><div class="progress-bar" id="progressBar" data-percentage="0%"></div></div>
@@ -83,7 +83,6 @@
             let longitude = '未知';
             const isProxy = "不适用";
 
-            // 如果归属地为中国，只显示“中国”，且经纬度显示“未知”
             if (data.country === 'CN') {
                 location = '中国';
             } else {
@@ -105,8 +104,8 @@
             const totalTests = 3;
             let completedTests = 0;
 
-            const ipv4Site = 'http://api.ipify.org'; // IPv4测试API
-            const ipv6Site = 'https://api6.ipify.org'; // IPv6测试API
+            const ipv4Site = 'http://api.ipify.org';
+            const ipv6Site = 'https://api6.ipify.org';
             const pingUrls = ['cn.bing.com', 'github.com', 'google.com', 'google.com.hk'];
 
             const ipv4Result = await checkConnectivity(ipv4Site);
@@ -166,7 +165,7 @@
         }
 
         function goToMainSite() {
-            window.location.href = 'chongxi.top';
+            window.location.href = 'https://chongxi.top/tools/index.html';
         }
 
         fetchIPInfo();
