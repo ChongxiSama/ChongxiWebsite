@@ -5,67 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IP信息</title>
     <style>
+        :root {
+            --primary-color: rgb(130, 209, 189);
+            --background-color: rgb(239, 246, 244);
+            --card-color: rgb(255, 255, 255);
+            --text-color: rgb(0, 0, 0);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: rgb(97, 175, 145);
+                --background-color: rgb(30, 30, 30);
+                --card-color: rgb(45, 45, 45);
+                --text-color: rgb(255, 255, 255);
+            }
+        }
+
+        @supports (color-scheme: light dark) {
+            :root {
+                color-scheme: light dark;
+            }
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-image: url('https://i.ibb.co/qrW7nyS/illust-105994602-20240828-111844.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-            backdrop-filter: blur(10px);
+            font-family: 'Google Sans', 'Roboto', sans-serif;
             margin: 0;
             padding: 20px;
-            text-align: left;
-            color: white;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            animation: background-shift 8s infinite alternate;
         }
+
+        @keyframes background-shift {
+            0% { background-color: var(--background-color); }
+            50% { background-color: rgba(130, 209, 189, 0.8); }
+            100% { background-color: var(--background-color); }
+        }
+
+        h1 {
+            color: var(--primary-color);
+        }
+
         button {
-            margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
-            background-color: #39C5BB;
+            border-radius: 12px;
+            background-color: var(--primary-color);
             color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
         }
+
         button:hover {
-            background-color: #31A19A;
+            transform: scale(1.03);
+            background-color: var(--card-color);
+            color: var(--text-color);
         }
-        footer {
-            margin-top: 20px;
+
+        button:active {
+            box-shadow: 0 0 10px var(--primary-color);
         }
-        pre {
-            text-align: left;
-            display: inline-block;
-            margin-top: 10px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 5px;
-            max-width: 90%;
-            overflow: auto;
-        }
+
         .progress {
             width: 100%;
-            background-color: #f3f3f3;
-            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
             overflow: hidden;
             margin: 20px 0;
         }
+
         .progress-bar {
             height: 20px;
-            background-color: #39C5BB;
+            background-color: var(--primary-color);
             width: 0;
             transition: width 0.4s;
             position: relative;
         }
+
         .progress-bar::after {
             content: attr(data-percentage);
             position: absolute;
             right: 5px;
             color: white;
         }
+
+        pre {
+            background-color: var(--card-color);
+            padding: 10px;
+            border-radius: 12px;
+            color: var(--text-color);
+            overflow-x: auto;
+        }
+
+        footer a {
+            color: var(--primary-color);
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 style="color: #39C5BB;">您的IP信息</h1>
+    <h1>您的IP信息</h1>
     <p>测试可能需要30s 请耐心等待</p>
     <div id="result"></div>
     <div class="progress"><div class="progress-bar" id="progressBar" data-percentage="0%"></div></div>
