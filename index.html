@@ -6,23 +6,29 @@
     <title>Chongxi's Homepage</title>
     <style>
         :root {
-            --primary-color: #90caf9; /* 动态色 */
-            --background-color: #121212; /* 暗色背景 */
-            --card-color: #1e1e1e; /* 按钮卡片背景 */
-            --text-color: #ffffff; /* 文字颜色 */
+            --primary-color: rgb(130, 209, 189);
+            --background-color: rgb(239, 246, 244);
+            --card-color: rgb(255, 255, 255);
+            --text-color: rgb(0, 0, 0);
         }
 
-        @media (prefers-color-scheme: light) {
+        @media (prefers-color-scheme: dark) {
             :root {
-                --primary-color: #1976d2;
-                --background-color: #f5f5f5;
-                --card-color: #ffffff;
-                --text-color: #000000;
+                --primary-color: rgb(97, 175, 145);
+                --background-color: rgb(30, 30, 30);
+                --card-color: rgb(45, 45, 45);
+                --text-color: rgb(255, 255, 255);
+            }
+        }
+
+        @supports (color-scheme: light dark) {
+            :root {
+                color-scheme: light dark;
             }
         }
 
         body {
-            font-family: 'Google Sans', sans-serif;
+            font-family: 'Google Sans', 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--background-color);
@@ -32,6 +38,13 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            animation: background-shift 8s infinite alternate;
+        }
+
+        @keyframes background-shift {
+            0% { background-color: var(--background-color); }
+            50% { background-color: rgba(130, 209, 189, 0.8); }
+            100% { background-color: var(--background-color); }
         }
 
         .header {
@@ -41,27 +54,34 @@
 
         .header h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 28px;
             color: var(--primary-color);
         }
 
         .header p {
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .button-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
             width: 100%;
-            max-width: 600px;
+            max-width: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .button-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                max-width: 800px;
+            }
         }
 
         .button {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
             padding: 16px;
             border-radius: 12px;
             background-color: var(--card-color);
@@ -72,11 +92,14 @@
             transition: transform 0.2s, background-color 0.3s, border-radius 0.2s;
         }
 
+        .button:active {
+            border-radius: 20px;
+        }
+
         .button:hover {
-            transform: scale(1.02);
+            transform: scale(1.03);
             background-color: var(--primary-color);
             color: #fff;
-            border-radius: 16px; /* 动态圆角 */
         }
 
         .button .icon {
@@ -88,6 +111,7 @@
             align-items: center;
             justify-content: center;
             margin-right: 12px;
+            flex-shrink: 0;
             overflow: hidden;
         }
 
@@ -96,71 +120,91 @@
             height: 100%;
             object-fit: cover;
         }
+
+        .button span {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .button:active {
+            box-shadow: 0 0 10px var(--primary-color);
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="header">
         <h1>Chongxi's Homepage</h1>
-        <p id="poem">Loading poetry...</p>
+        <p id="poem">Welcome!</p>
     </div>
 
     <div class="button-list">
         <a href="https://blog.chongxi.top" class="button">
             <div class="icon">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/blog.png" alt="博客图标">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/blog.png" alt="Blog">
             </div>
             <span>Blog</span>
         </a>
-
         <a href="https://chongxi.top/tools/index.html" class="button">
             <div class="icon">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/toolbox.png" alt="工具箱图标">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/toolbox.png" alt="Toolbox">
             </div>
             <span>Toolbox</span>
         </a>
-
         <a href="https://github.com/ChongxiSama" class="button">
             <div class="icon">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub图标">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub">
             </div>
             <span>GitHub</span>
         </a>
-
         <a href="https://m.bilibili.com/space/500042199" class="button">
             <div class="icon">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/video.png" alt="B站图标">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/video.png" alt="Bilibili">
             </div>
             <span>Bilibili</span>
         </a>
-
         <a href="mailto:qwq@chongxi.top" class="button">
             <div class="icon">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/email.png" alt="邮件图标">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/email.png" alt="Email">
             </div>
             <span>Email me</span>
         </a>
-
-        <a href="#about" class="button">
+        <a href="#" class="button">
             <div class="icon">
-                <img src="https://github.com/ChongxiSama.png" alt="头像">
+                <img src="https://avatars.githubusercontent.com/u/YOUR_GITHUB_ID?v=4" alt="About Me">
             </div>
             <span>About Me</span>
         </a>
     </div>
 
     <script>
-        // 诗词 API
-        fetch('https://api.ixiaowai.cn/ylapi/index.php')
-            .then(response => response.text())
+        // 替换为支持GitHub Pages的古诗词API
+        fetch('https://api.gushi.ci/all.json')
+            .then(response => response.json())
             .then(data => {
                 const poemElement = document.getElementById('poem');
-                poemElement.textContent = data.trim(); // API 返回纯文本
+                poemElement.textContent = `${data.content} —— ${data.origin} · ${data.author}`;
             })
             .catch(error => {
                 console.error('Error fetching poetry:', error);
                 const poemElement = document.getElementById('poem');
-                poemElement.textContent = "Welcome! May your day be filled with inspiration.";
+                poemElement.textContent = "Welcome!";
             });
+
+        // 按钮触摸动效
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.boxShadow = `0 0 20px var(--primary-color)`;
+            });
+
+            button.addEventListener('mouseup', () => {
+                button.style.boxShadow = `0 2px 4px rgba(0, 0, 0, 0.2)`;
+            });
+
+            button.addEventListener('mouseleave', () => {
+                button.style.boxShadow = `0 2px 4px rgba(0, 0, 0, 0.2)`;
+            });
+        });
     </script>
 </body>
 </html>
