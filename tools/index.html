@@ -5,87 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toolbox</title>
     <style>
-        /* 设置背景字体 */
-        body {
-            font-family: 'MiSans', Arial, sans-serif; /* 自定字体 */
-            line-height: 1.6;
-            margin: 20px;
-            background-image: url('https://i.ibb.co/qrW7nyS/illust-105994602-20240828-111844.jpg');
-            background-size: cover; /* 覆盖 */
-            background-position: center; /* 居中 */
-            background-attachment: fixed; /* 固定 */
-            background-repeat: no-repeat; /* 防止重复 */
-            color: white; /* 字色 */
+        :root {
+            --primary-color: rgb(130, 209, 189);
+            --background-color: rgb(239, 246, 244);
+            --text-color: rgb(0, 0, 0);
         }
 
-        /* 高斯模糊 */
-        .content {
-            backdrop-filter: blur(10px); /* 高斯模糊 */
-            background-color: rgba(255, 255, 255, 0.1); /* 透明度 */
-            padding: 20px; /* 字边距 */
-            border-radius: 10px; /* 圆角 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: rgb(97, 175, 145);
+                --background-color: rgb(30, 30, 30);
+                --text-color: rgb(255, 255, 255);
+            }
+        }
+
+        @supports (color-scheme: light dark) {
+            :root {
+                color-scheme: light dark;
+            }
+        }
+
+        body {
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
 
         h1, h2 {
-            color: #fff; /* 标题色 */
+            margin: 0 0 16px;
+            color: var(--primary-color);
         }
 
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        a {
-            color: #4FC3F7; /* 链接色 */
-            text-decoration: none; /* 去掉下划线 */
-        }
-
-        a:hover {
-            color: #0288D1; /* 鼠标悬停链接色 */
-        }
-
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 5px 0;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.2); /* 按钮背景色 */
-            color: white; /* 按钮字体颜色 */
-            cursor: pointer;
+        p {
+            margin: 0 0 20px;
             text-align: center;
         }
 
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 16px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* 默认按钮样式 */
+.button {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: var(--card-color);  /* 默认卡片背景色 */
+    color: var(--text-color);  /* 默认文字颜色 */
+    text-decoration: none;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.3s, border-radius 0.2s;
+}
+
+/* 黑暗模式下按钮样式 */
+@media (prefers-color-scheme: dark) {
+    .button {
+        background-color: rgb(45, 45, 45);  /* 黑暗模式背景色 */
+        color: white;  /* 黑暗模式文字颜色 */
+    }
+}
+
         .button:hover {
-            background-color: rgba(255, 255, 255, 0.4); /* 悬停效果 */
+            transform: scale(1.03);
+            background-color: var(--primary-color);
+            color: white;
         }
 
-        /* 定义字体 */
-        @font-face {
-            font-family: 'MiSans';
-            src: url('MiSans-Normal.ttf') format('truetype');
-        }
-
-        h1 {
-            font-weight: bold;
+        .button:active {
+            border-radius: 20px;
+            box-shadow: 0 0 10px var(--primary-color);
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>工具箱目录</h1>
-        <p>这里有一些小小的实用功能 可能不是很好用 写一些小东西用来练习练习</p>
-        <hr>
-        <h2>索引</h2>
-        <ul>
-            <li><a href="https://chongxi.top/tools/iptest.html" class="button">IP信息</a></li>
-            <li><a href="https://chongxi.top/tools/ifvpn.html" class="button">代理/VPN可疑度检查</a></li>
-            <li><a href="chongxi.top" class="button">敬请期待</a></li>
-            <li><a href="chongxi.top" class="button">敬请期待</a></li>
-            <!-- 在这里添加更多工具链接 -->
-        </ul>
-        <hr>
-        <p><a href="https://chongxi.top" class="button">返回主站</a></p> <!-- 添加返回主站链接 -->
-    </div>
+    <h1>工具箱目录</h1>
+    <p>这里有一些小功能，可能不是很好用，写东西用来练习练习。</p>
+    <h2>索引</h2>
+    <ul>
+        <li><a href="https://chongxi.top/tools/iptest.html" class="button">IP信息</a></li>
+        <li><a href="https://chongxi.top/tools/ifvpn.html" class="button">代理/VPN可疑度检查</a></li>
+        <li><a href="chongxi.top" class="button">敬请期待</a></li>
+        <li><a href="chongxi.top" class="button">敬请期待</a></li>
+    </ul>
+    <a href="https://chongxi.top" class="button" style="margin-top: 20px;">返回主站</a>
 </body>
 </html>
