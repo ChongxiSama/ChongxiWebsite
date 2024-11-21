@@ -3,115 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chongxiの个人站</title>
+    <title>Chongxi's Homepage</title>
     <style>
-        /* 字体定义 */
-        @font-face {
-            font-family: 'MiSans';
-            src: url('/fonts/MiSans-Normal.woff') format('woff');
+        :root {
+            --primary-color: rgb(130, 209, 189);
+            --background-color: rgb(239, 246, 244);
+            --card-color: rgb(255, 255, 255);
+            --text-color: rgb(0, 0, 0);
         }
 
-        /* 全局样式 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: rgb(97, 175, 145);
+                --background-color: rgb(30, 30, 30);
+                --card-color: rgb(45, 45, 45);
+                --text-color: rgb(255, 255, 255);
+            }
+        }
+
+        @supports (color-scheme: light dark) {
+            :root {
+                color-scheme: light dark;
+            }
+        }
+
         body {
-            font-family: 'MiSans', sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background: url('https://i.ibb.co/qrW7nyS/illust-105994602-20240828-111844.jpg') center/cover fixed no-repeat;
-            color: white;
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            animation: background-shift 8s infinite alternate;
         }
 
-        /* 内容容器样式 */
-        .content {
-            backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px; /* 保持圆角 */
+        @keyframes background-shift {
+            0% { background-color: var(--background-color); }
+            50% { background-color: rgba(130, 209, 189, 0.8); }
+            100% { background-color: var(--background-color); }
         }
 
-        /* 标题样式 */
-        h1, h2 {
-            color: #fff;
-            font-weight: bold;
-        }
-
-        /* 列表样式 */
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        /* 链接样式 */
-        a {
-            color: #4FC3F7;
-        }
-
-        a:hover {
-            color: #0288D1;
-        }
-
-        /* 按钮样式 */
-        .button {
-            display: inline-block;
-            padding: 10px 15px;
-            margin: 5px 0;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.2); /* 按钮背景色 */
-            color: white; /* 按钮字体颜色 */
-            text-decoration: none; /* 去掉下划线 */
+        .header {
             text-align: center;
-            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: var(--primary-color);
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .button-list {
+            display: grid;
+            gap: 16px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .button-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                max-width: 800px;
+            }
+        }
+
+        .button {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-radius: 12px;
+            background-color: var(--card-color);
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, background-color 0.3s, border-radius 0.2s;
+        }
+
+        .button:active {
+            border-radius: 20px;
         }
 
         .button:hover {
-            background-color: rgba(255, 255, 255, 0.4); /* 悬停效果 */
+            transform: scale(1.03);
+            background-color: var(--primary-color);
+            color: #fff;
         }
 
-        /* 隐藏未使用的内容模块 */
-        .hidden {
-            display: none;
+        .button .icon {
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .button .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button span {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .button:active {
+            box-shadow: 0 0 10px var(--primary-color);
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="header">
+        <h1>Chongxi's Homepage</h1>
+        <p id="poem">Fetching poetry...</p>
+    </div>
 
-<div class="content">
-    <h1>这里是Chongxiの个人站!</h1>
-    <p>本人能力有限 目前仅会基础的html 后续会逐步学习 有问题欢迎各位大佬指出</p>
+    <div class="button-list">
+        <a href="https://blog.chongxi.top" class="button">
+            <div class="icon">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/blog.png" alt="Blog">
+            </div>
+            <span>Blog</span>
+        </a>
+        <a href="https://chongxi.top/tools/index.html" class="button">
+            <div class="icon">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/toolbox.png" alt="Toolbox">
+            </div>
+            <span>Toolbox</span>
+        </a>
+        <a href="https://github.com/ChongxiSama" class="button">
+            <div class="icon">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub">
+            </div>
+            <span>GitHub</span>
+        </a>
+        <a href="https://m.bilibili.com/space/500042199" class="button">
+            <div class="icon">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/video.png" alt="Bilibili">
+            </div>
+            <span>Bilibili</span>
+        </a>
+        <a href="mailto:qwq@chongxi.top" class="button">
+            <div class="icon">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/email.png" alt="Email">
+            </div>
+            <span>Email me</span>
+        </a>
+        <a href="#" class="button">
+            <div class="icon">
+                <img src="path-to-your-avatar.png" alt="About me">
+                </div>
+            <span>About Me</span>
+        </a>
+    </div>
 
-    <h1>引导链接</h1>
-    <ul>
-        <li>个人blog: <a href="https://blog.chongxi.top" class="button">目录</a></li>
-        <li>工具箱: <a href="https://chongxi.top/tools/index.html" class="button">打开工具箱</a></li> <!-- 新增工具箱按钮 -->
-    </ul>
+    <script>
+        
+        fetch('https://v1.jinrishici.com/all.json')
+            .then(response => response.json())
+            .then(data => {
+                const poemElement = document.getElementById('poem');
+                poemElement.textContent = `${data.content} —— ${data.origin} · ${data.author}`;
+            })
+            .catch(error => {
+                console.error('Error fetching poetry:', error);
+                const poemElement = document.getElementById('poem');
+                poemElement.textContent = "Welcome! May your day be filled with inspiration.";
+            
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.boxShadow = `0 0 20px var(--primary-color)`;
+            });
 
-    <hr>
+            button.addEventListener('mouseup', () => {
+                button.style.boxShadow = `0 2px 4px rgba(0, 0, 0, 0.2)`;
+            });
 
-    <h2>== 关于Chongxi ==</h2>
-    <ul>
-        <li><strong>重熙</strong> - <strong>Chongxi</strong></li>
-        <li><strong>性别</strong>: 未透露</li>
-        <li><strong>外貌</strong>: 据Chongxi朋友的形容为「瘦长鬼影」</li>
-        <li><strong>爱好</strong>: 计算机科学，电气学，气象等</li>
-
-    <h2>相关的外部账号</h2>
-    <ul>
-        <li><strong>GitHub</strong>: <a href="https://github.com/ChongxiSama">ChongxiSama</a></li>
-        <li><strong>bilibili</strong>: <a href="https://m.bilibili.com/space/500042199">CEPATO</a></li>
-    </ul>
-
-    <h2>如何联系Chongxi</h2>
-    <ul>
-        <li><strong>Outlook</strong>: chongxiace666@outlook.com</li>
-        <li><strong>QQ邮箱</strong>: 2623993663@qq.com</li>
-    </ul>
-
-    <hr>
-
-    <h2>其他内容敬请期待</h2>
-    <p>Chongxi & CEPATO 2074 A.D.</p>
-    <p>本站已支持IPv6访问</p>
-</div>
-
+            button.addEventListener('mouseleave', () => {
+                button.style.boxShadow = `0 2px 4px rgba(0, 0, 0, 0.2)`;
+            });
+        });
+    </script>
 </body>
 </html>
