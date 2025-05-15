@@ -1,210 +1,121 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chongxi's Homepage</title>
-    <style>
-        :root {
-            --primary-color: rgb(130, 209, 189);
-            --background-color: rgb(239, 246, 244);
-            --card-color: rgb(255, 255, 255);
-            --text-color: rgb(0, 0, 0);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEPATO</title></title>
+  <style>
+    body {
+      background-color: #111;
+      color: #ddd;
+      font-family: monospace;
+      margin: 2em;
+    }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --primary-color: rgb(97, 175, 145);
-                --background-color: rgb(30, 30, 30);
-                --card-color: rgb(45, 45, 45);
-                --text-color: rgb(255, 255, 255);
-            }
-        }
+    h1 {
+      font-size: 6vw;
+      max-width: 100%;
+      background: linear-gradient(to right, #333, #000);
+      color: white;
+      padding: 0.5em;
+      display: inline-block;
+      line-height: 1.2;
+      border-radius: 0.25em;
+    }
 
-        @supports (color-scheme: light dark) {
-            :root {
-                color-scheme: light dark;
-            }
-        }
+    a {
+      color: #ccc;
+      text-decoration: none;
+    }
 
-        body {
-            font-family: 'Google Sans', 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            animation: background-shift 8s infinite alternate;
-        }
+    a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
 
-        @keyframes background-shift {
-            0% { background-color: var(--background-color); }
-            50% { background-color: rgba(130, 209, 189, 0.8); }
-            100% { background-color: var(--background-color); }
-        }
+    .section {
+      margin-top: 2em;
+    }
 
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .entry {
+      margin-bottom: 0.5em;
+    }
 
-        .header h1 {
-            margin: 0;
-            font-size: 28px;
-            color: var(--primary-color);
-        }
+    .date {
+      color: #888;
+      margin-right: 1em;
+    }
 
-        .header p {
-            margin: 0;
-            font-size: 16px;
-        }
+    .age {
+      color: #555;
+      margin-left: 1em;
+    }
 
-        .button-list {
-            display: grid;
-            gap: 16px;
-            width: 100%;
-            max-width: 400px;
-        }
+    hr {
+      border: none;
+      border-top: 1px dashed #444;
+      margin: 2em 0;
+    }
 
-        @media (min-width: 768px) {
-            .button-list {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-                max-width: 800px;
-            }
-        }
-
-        .button {
-            display: flex;
-            align-items: center;
-            padding: 16px;
-            border-radius: 12px;
-            background-color: var(--card-color);
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 16px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s, background-color 0.3s, border-radius 0.2s;
-        }
-
-        .button:active {
-            border-radius: 20px;
-        }
-
-        .button:hover {
-            transform: scale(1.03);
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-
-        .button .icon {
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
-
-        .button .icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .button span {
-            flex-grow: 1;
-            text-align: left;
-        }
-
-        .button:active {
-            box-shadow: 0 0 10px var(--primary-color);
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    @media (max-width: 600px) {
+      body {
+        margin: 1em;
+      }
+      h1 {
+        font-size: 8vw;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Chongxi's Homepage</h1>
-        <p id="poem">Welcome!</p>
+  <h1>Chongxi's HomePage</h1>
+
+  <div>
+    <a href="https://chongxi.top/">Home</a>---<a href="https://github.com/ChongxiSama">GitHub</a> --- 1970-3555
+  </div>
+
+  <hr>
+
+  <p>「莫听穿林打叶声，何妨吟啸且徐行。」</p>
+
+  <div class="section">
+    <h2>Social</h2>
+    <div class="entry">
+      <span class="categ">[bilibili]</span>
+      <a href="https://m.bilibili.com/space/500042199">@CEPATO</a>
     </div>
-
-    <div class="button-list">
-        <a href="https://blog.chongxi.top" class="button">
-            <div class="icon">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/blog.png" alt="Blog">
-            </div>
-            <span>Blog</span>
-        </a>
-        <a href="https://chongxi.top/tools/index.html" class="button">
-            <div class="icon">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/toolbox.png" alt="Toolbox">
-            </div>
-            <span>Toolbox</span>
-        </a>
-        <a href="https://github.com/ChongxiSama" class="button">
-            <div class="icon">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub">
-            </div>
-            <span>GitHub</span>
-        </a>
-        <a href="https://m.bilibili.com/space/500042199" class="button">
-            <div class="icon">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/video.png" alt="Bilibili">
-            </div>
-            <span>Bilibili</span>
-        </a>
-        <a href="mailto:qwq@chongxi.top" class="button">
-            <div class="icon">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/email.png" alt="Email">
-            </div>
-            <span>Email me</span>
-        </a>
-        <a href="https://sky.chongxi.top/" class="button">
-            <div class="icon">
-                <img src="https://cdn.jsdelivr.net/gh/alist-org/logo@main/logo.svg" alt="SkyDrive">
-            </div>
-            <span>SkyDrive</span>
-        </a>
+    <div class="entry">
+      <span class="categ">[GitHub]</span>
+      <a href="https://github.com/ChongxiSama">@ChongxiSama</a>
     </div>
+    <div class="entry">
+        <span class="categ">[X]</span>
+        <a href="https://x.com/CEPATO233/">@CEPATO233</a>
+    </div>
+    <div class="entry">
+        <span class="categ">[Telegram]</span>
+        <a href="https://t.me/Chongxi3555">@Chongxi3555</a>
+  </div>
 
-    <script>
-        // 替换为支持GitHub Pages的古诗词API
-        fetch('https://api.gushi.ci/all.json')
-            .then(response => response.json())
-            .then(data => {
-                const poemElement = document.getElementById('poem');
-                poemElement.textContent = `${data.content} —— ${data.origin} · ${data.author}`;
-            })
-            .catch(error => {
-                console.error('Error fetching poetry:', error);
-                const poemElement = document.getElementById('poem');
-                poemElement.textContent = "Welcome!";
-            });
+  <hr>
 
-        // 按钮触摸动效
-        document.querySelectorAll('.button').forEach(button => {
-            button.addEventListener('mousedown', () => {
-                button.style.boxShadow = `0 0 20px var(--primary-color)`;
-            });
+  <div class="section">
+    <h2>Services</h2>
+    <div class="entry">
+      <span class="serv">[个人网盘]</span>
+      <a href="https://void.chongxi.top/">Alist</a>
+    </div>
+  </div>
 
-            button.addEventListener('mouseup', () => {
-                button.style.boxShadow = `0 2px 4px rgba(0, 0, 0, 0.2)`;
-            });
+  <hr>
 
-            button.addEventListener('mouseleave', () => {
-                button.style.boxShadow = `0 2px 4px rgba(0, 0, 0, 0.2)`;
-            });
-        });
-    </script>
+  <div class="section">
+    <h2>Blog</h2>
+    <div class="entry">
+      <span class="blog">[1970-01-01]</span>
+      <a href="blog/1970/hw.html">Hello,World</a>
+    </div>
+   <div><a href="blog/index.html">... view all</a></div>
+  </div>
 </body>
 </html>
