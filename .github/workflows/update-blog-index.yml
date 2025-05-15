@@ -1,0 +1,41 @@
+name: Update Blog Index
+
+on:
+  push:
+    paths:
+      - 'blog/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  
+
+      - name: Generate blog index
+        run: |
+          cd blog
+          echo "[" > index.json
+          first=true
+          for file in *.html; do
+            if [ "$first" = true ]; then
+              first=false
+            else
+              echo "," >> index.json
+            fi
+            lastmod=$(git log -1 --format="%cI" -- "$file")
+            echo "{\"file\": \"$file\", \"lastmod\": \"$lastmod\"}" >> index.json
+          done
+          echo "]" >> index.json
+
+      - name: Commit and push index
+        run: |
+          cd blog
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.json
+          git commit -m "Update blog index.json" || echo "No changes to commit"
+          git push
