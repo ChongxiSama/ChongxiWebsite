@@ -1,25 +1,69 @@
-name: Generate Blog Index
+const fs = require('fs');
+const path = require('path');
 
-on:
-  push:
-    paths:
-      - 'blog/**'
+const BLOG_DIR = path.join(__dirname, 'blog');
+const OUTPUT_FILE = path.join(BLOG_DIR, 'blog_index.json');
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+function walkDir(dir) {
+  let results = [];
+  const list = fs.readdirSync(dir, { withFileTypes: true });
+  list.forEach((dirent) => {
+    const fullPath = path.join(dir, dirent.name);
+    if (dirent.isDirectory()) {
+      results = results.concat(walkDir(fullPath));
+    } else if (dirent.isFile() && fullPath.endsWith('.html')) {
+      results.push(fullPath);
+    }
+  });
+  return results;
+}
 
-      - name: Generate blog_index.json
-        run: |
-          find blog -name '*.html' > blog_files.txt
-          node generate_blog_index.js blog_files.txt blog/blog_index.json
+function parseBlogInfo(filePath) {
+  // blog/YYYY-MM-DD/xxx.html
+  const relPath = path.relative(BLOG_DIR, filePath).replace(/\\/g, '/');
+  const parts = relPath.split('/');
 
-      - name: Commit blog_index.json
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add blog/blog_index.json
-          git commit -m "Update blog_index.json" || echo "No changes to commit"
-          git push
+  // 取第一个文件夹名或文件名前缀作为日期
+  let date = '';
+  let title = '';
+
+  if (parts.length >= 2) {
+    date = parts[0];
+    title = path.basename(parts[1], '.html');
+  } else {
+    // 直接blog根目录下文件
+    const base = path.basename(relPath, '.html');
+    const m = base.match(/^(\d{4}-\d{2}-\d{2})[-_]?(.+)?$/);
+    if (m) {
+      date = m[1];
+      title = m[2] || base;
+    } else {
+      date = '1970-01-01';
+      title = base;
+    }
+  }
+
+  // 美化标题，替换 - 和 _ 为 空格
+  title = title.replace(/[-_]/g, ' ');
+
+  return {
+    path: relPath,
+    date,
+    title,
+  };
+}
+
+function main() {
+  const files = walkDir(BLOG_DIR);
+  let blogs = files.map(parseBlogInfo);
+
+  // 日期倒序排序
+  blogs.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+
+  // 只保留 path, date, title 字段
+  blogs = blogs.map(({ path, date, title }) => ({ path, date, title }));
+
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(blogs, null, 2), 'utf-8');
+}
+
+main();
