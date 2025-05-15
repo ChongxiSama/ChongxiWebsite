@@ -3,7 +3,7 @@ name: Update Blog Index
 on:
   push:
     paths:
-      - 'blog/*.html'
+      - 'blog/**/*.html'
 
 jobs:
   build:
