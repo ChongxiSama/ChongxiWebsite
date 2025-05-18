@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+  if (!document.cookie.includes("verified=1")) {
+    window.location.href = "/page/check.html";
+  }
+</script>
   <link rel="icon" type="image/png" href="https://img.picui.cn/free/2025/05/13/6822346847171.png">
   <meta charset="UTF-8">
   <!-- Open Graph Meta Tags -->
