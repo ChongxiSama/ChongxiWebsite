@@ -60,8 +60,8 @@
   <script>
     // Turnstile 验证成功回调
     function onTurnstileSuccess(token) {
-      // 通过验证，设置 cookie，期限 1 天
-      document.cookie = "verified=1; path=/; max-age=" + 60 * 60 * 24 + "; SameSite=Lax";
+      // 通过验证，设置 cookie，期限 10m
+      document.cookie = "verified=1; path=/; max-age=" + 10 + "; SameSite=Lax";
       // 跳转回首页
       window.location.href = "https://chongxi.us/";
     }
