@@ -5,6 +5,77 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CEPATO</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #ddd;
+      font-family: monospace;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 0 1.5em;
+    }
+
+    h1 {
+      font-size: 6vw;
+      max-width: 100%;
+      background: linear-gradient(to right, #333, #000);
+      color: white;
+      padding: 0.5em;
+      display: inline-block;
+      line-height: 1.2;
+      border-radius: 0.25em;
+    }
+
+    a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .section {
+      margin-top: 2em;
+    }
+
+    .entry {
+      margin-bottom: 0.5em;
+    }
+
+    .date {
+      color: #888;
+      margin-right: 1em;
+    }
+
+    .age {
+      color: #555;
+      margin-left: 1em;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px dashed #444;
+      margin: 2em 0;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 8vw;
+      }
+
+      .container {
+        padding: 0 1em;
+        margin: 1.5em auto;
+      }
+    }
+  </style>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 </head>
