@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://chongxi.top/sitemap.xml
+Sitemap: https://chongxi.us/sitemap.xml
