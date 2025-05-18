@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" type="image/png" href="https://img.picui.cn/free/2025/05/13/6822346847171.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEPATO</title>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    body {
+      background-color: #111;
+      color: #ddd;
+      font-family: monospace;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 0 1.5em;
+    }
+
+    h1 {
+      font-size: 6vw;
+      max-width: 100%;
+      background: linear-gradient(to right, #333, #000);
+      color: white;
+      padding: 0.5em;
+      display: inline-block;
+      line-height: 1.2;
+      border-radius: 0.25em;
+    }
+
+    a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .section {
+      margin-top: 2em;
+    }
+
+    .entry {
+      margin-bottom: 0.5em;
+    }
+
+    .date {
+      color: #888;
+      margin-right: 1em;
+    }
+
+    .age {
+      color: #555;
+      margin-left: 1em;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px dashed #444;
+      margin: 2em 0;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 8vw;
+      }
+
+      .container {
+        padding: 0 1em;
+        margin: 1.5em auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Chongxi's Homepage</h1>
+
+    <div id="clock" style="font-family: monospace; color: #ddd; font-size: 1.2em; margin-bottom: 1em;"></div>
+    <script>
+      function updateClock() {
+        const now = new Date();
+        const offset = -now.getTimezoneOffset() / 60;
+        const sign = offset >= 0 ? '+' : '-';
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        const timezone = `UTC${sign}${Math.abs(offset)}`;
+
+        document.getElementById('clock').textContent =
+          `${hours}:${minutes}:${seconds} ${timezone}`;
+      }
+
+      setInterval(updateClock, 1000);
+      updateClock();
+    </script>
+
+    <div>
+      <a href="https://github.com/ChongxiSama/ChongxiWebsite">GitHub</a> --- Chongxi & CEPATO ©2025 --- <a href="https://chongxi.top/pages/about.html">About</a>
+    </div>
+    <div>
+      <a href="https://icp.gov.moe/?keyword=20250591" target="_blank">萌ICP备20250591号</a>
+    </div>
+
+    <p>「莫听穿林打叶声，何妨吟啸且徐行。」</p>
+
+    <hr>
+    <p>来自 chongxi.us 的消息:<br>由于您的IP位于中国大陆 您需要进行机器人验证 通过后即可访问</p>
+
+    <div class="cf-turnstile"
+         data-sitekey="0x4AAAAAABdyEn7n5dyYrx8t"
+         data-size="compact"
+         data-theme="light">
+    </div>
+  </div>
+</body>
+</html>
