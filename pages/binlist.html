@@ -174,7 +174,7 @@
           resultBox.textContent = JSON.stringify(data, null, 2);
         })
         .catch(err => {
-          resultBox.textContent = "ERR: " + err.message;
+          resultBox.textContent = "ERR:查询请求遭到服务器拒绝";
         });
     }
   </script>
