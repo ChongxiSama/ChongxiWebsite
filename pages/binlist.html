@@ -160,7 +160,7 @@
       const bin = document.getElementById('binInput').value.trim();
       const resultBox = document.getElementById('result');
 
-      if (!/^\d{6,8}\$/.test(bin)) {
+      if (!/^\d{6,8}$/.test(bin)) {
         resultBox.textContent = "请输入有效 BIN";
         return;
       }
