@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>BIN Check</title>
+  <link rel="icon" href="https://img.picui.cn/free/2025/05/13/6822346847171.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        background-color: #111;
+        color: #ddd;
+        font-family: monospace;
+        margin: 0;
+         padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 0 1.5em;
+    }
+
+    h1 {
+      font-size: 6vw;
+      max-width: 100%;
+      background: linear-gradient(to right, #333, #000);
+      color: white;
+      padding: 0.5em;
+      display: inline-block;
+      line-height: 1.2;
+      border-radius: 0.25em;
+    }
+    
+    h2 {
+      font-weight: bold;
+      font-size: 1.8em;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .section {
+      margin-top: 2em;
+    }
+
+    .entry {
+      margin-bottom: 0.5em;
+    }
+
+    .date {
+      color: #888;
+      margin-right: 1em;
+    }
+
+    .age {
+      color: #555;
+      margin-left: 1em;
+    }
+    
+    hr {
+      border: none;
+      border-top: 1px dashed #444;
+      margin: 2em 0;
+    }
+    p {
+       font-size: 1em;
+       font-weight: normal;
+       margin: 0.5em 0;
+       line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 8vw;
+      }
+
+      .container {
+        padding: 0 1em;
+        margin: 1.5em auto;
+    }
+
+    input, button {
+        font-family: monospace;
+        font-size: 1em;
+        padding: 0.5em;
+        margin: 0.25em 0;
+        width: 100%;
+        box-sizing: border-box;
+        background: #222;
+        color: #ddd;
+        border: 1px solid #444;
+        border-radius: 4px;
+    }
+
+    button\:hover {
+        background: #333;
+    }
+
+    pre {
+        white-space: pre-wrap;
+        background: #222;
+        padding: 1em;
+        border-radius: 4px;
+        border: 1px dashed #444;
+        margin-top: 1em;
+    }
+    section {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <h1>BIN 查询工具</h1>
+<div id="clock" style="font-family: monospace; color: #ddd; font-size: 1.2em; margin-bottom: 1em;"></div>
+<script>
+      function updateClock() {
+        const now = new Date();
+        const offset = -now.getTimezoneOffset() / 60;
+        const sign = offset >= 0 ? '+' : '-';
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        const timezone = `UTC${sign}${Math.abs(offset)}`;
+
+        document.getElementById('clock').textContent =
+          `${hours}:${minutes}:${seconds} ${timezone}`;
+      }
+
+      setInterval(updateClock, 1000);
+      updateClock();
+</script>
+
+    <div>
+    <a href="https://chongxi.top/">HOME</a> --- Chongxi & CEPATO --- ©2025
+    </div>
+    <div>
+    <a href="https://binlist.net/">Supported by BANLIST</a>
+    </div>
+<hr>
+    <input type="text" id="binInput" placeholder="在此键入BIN(卡号前6-8位)">
+    <button onclick="queryBIN()">Run</button>
+    <pre id="result">输出</pre>
+  </div>
+  <script>
+    function queryBIN() {
+      const bin = document.getElementById('binInput').value.trim();
+      const resultBox = document.getElementById('result');
+
+      if (!/^\d{6,8}\$/.test(bin)) {
+        resultBox.textContent = "请输入有效 BIN";
+        return;
+      }
+
+      fetch(`https://lookup.binlist.net/${bin}`)
+        .then(res => {
+          if (!res.ok) throw new Error("暂未收录此BIN数据");
+          return res.json();
+        })
+        .then(data => {
+          resultBox.textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(err => {
+          resultBox.textContent = "ERR: " + err.message;
+        });
+    }
+  </script>
+  <hr>
+  <section style="margin-top: 2em;">
+  <h2>什么是卡 BIN？</h2>
+  <p>
+银行卡 BIN（Bank Identification Number，银行识别号）是银行卡号的前6位数字，用于识别该卡的发卡银行及其相关信息。<br>BIN 是全球支付系统中的重要组成部分。
+  </p>
+ <h3>卡 BIN 可以提供哪些信息？</h3>
+  <ul>
+<li>发卡银行（例如：中国工商银行、招商银行等）</li>
+<li>卡片属于的银行卡组织（如 Visa、MasterCard、银联等）</li>
+<li>卡片类型（如信用卡、借记卡、预付卡）</li>
+<li>发卡国家或地区</li>
+ </ul>
+<h3>常见卡 BIN 开头与银行卡组织</h3>
+<p>下面是一些常见银行卡号开头与对应卡组织的关系，仅供参考：</p>
+<ul>
+ <li><strong>4 开头：</strong>Visa</li>
+ <li><strong>5 开头：</strong>MasterCard（万事达）</li>
+ <li><strong>6 开头：</strong>银联（China UnionPay）</li>
+ <li><strong>34 或 37 开头：</strong>American Express（美国运通，Amex）</li>
+ <li><strong>35 开头：</strong>JCB（日本）</li>
+ <li><strong>30, 36, 38 开头：</strong>Diners Club（大来卡）</li>
+ <li><strong>62 开头：</strong>通常也属于银联（China UnionPay)</li>
+ <li><strong>60、65、644–649 开头：</strong>Discover（美国）</li>
+</ul>
+<p>不同国家和银行发卡策略可能有所不同，上述信息仅供参考。</p>
+<h3>卡 BIN 安全</h3>
+<p>
+卡 BIN 本身只是一段公共识别信息，不包含任何个人隐私数据。<br>
+ 举例来说，多张来自同一家银行、同一种卡类型的银行卡，其 BIN 是相同的。<br>
+因此，查询 BIN 信息是安全的，不会暴露您的银行卡号、姓名、CVV 或有效期等敏感信息。
+  </p>
+<h3>免责声明</h3>
+<p>本工具仅查询卡 BIN 信息，不收集或储存任何完整卡号信息。<br>
+请勿尝试在任何非正规平台上输入完整卡号、CVV、密码或验证码等信息，以免信息泄露和资金损失。
+  </p>
+</section>
+</body>
+</html>
