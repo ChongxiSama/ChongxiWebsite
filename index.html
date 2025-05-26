@@ -185,6 +185,45 @@
   <div class="sky" id="starfield"></div>
   <div class="aurora"></div>
   <div class="polaris"></div>
+    <script>
+    // 随机生成星星
+    const starField = document.getElementById('starfield');
+    const totalStars = 200;
+    for (let i = 0; i < totalStars; i++) {
+      const star = document.createElement('div');
+      const size = Math.random() * 2 + 1;
+      star.classList.add('star');
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.opacity = Math.random();
+      star.style.animationDuration = `${1.5 + Math.random()}s`;
+      starField.appendChild(star);
+    }
+  </script>
+
+  <div class="container">
+    <h1>innocence</h1>
+
+    <div id="clock" style="font-family: monospace; color: #ddd; font-size: 1.2em; margin-bottom: 1em;"></div>
+    <script>
+      function updateClock() {
+        const now = new Date();
+        const offset = -now.getTimezoneOffset() / 60;
+        const sign = offset >= 0 ? '+' : '-';
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        const timezone = `UTC${sign}${Math.abs(offset)}`;
+
+        document.getElementById('clock').textContent =
+          `${hours}:${minutes}:${seconds} ${timezone}`;
+      }
+
+      setInterval(updateClock, 1000);
+      updateClock();
+    </script>
   <div class="container">
     <h1>Polaris★北极星导航站</h1>
 
