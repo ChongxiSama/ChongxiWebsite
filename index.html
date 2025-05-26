@@ -26,19 +26,107 @@
 <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CEPATO</title>
-  <style>
-    body {
-      background-color: #111;
+<style>
+    /* 页面整体背景和字体 */
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: radial-gradient(ellipse at center, #000010 0%, #000000 100%);
       color: #ddd;
       font-family: monospace;
-      margin: 0;
-      padding: 0;
+      overflow-y: auto; /* 允许竖向滚动 */
     }
 
+    /* 固定背景元素，始终铺满视口 */
+    .sky, .aurora, .polaris {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* 背景不阻碍鼠标操作 */
+      z-index: 0;
+    }
+
+    /* 星空容器 */
+    .sky {
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    /* 单颗星星 */
+    .star {
+      position: fixed;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite ease-in-out alternate;
+      pointer-events: none;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 0.9; }
+    }
+
+    /* 极光效果 */
+    .aurora {
+      top: 50%;
+      left: 50%;
+      width: 800px;
+      height: 800px;
+      background: conic-gradient(from 0deg, 
+        rgba(0, 255, 200, 0.2), 
+        rgba(0, 100, 255, 0.15), 
+        rgba(255, 0, 255, 0.1), 
+        rgba(0, 255, 200, 0.2));
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: spin 40s linear infinite, flicker 5s ease-in-out infinite;
+      filter: blur(90px);
+      opacity: 0.5;
+      z-index: 1;
+      position: fixed;
+      pointer-events: none;
+    }
+
+    .aurora::after {
+      content: '';
+      position: fixed;
+      width: 800px;
+      height: 800px;
+      background: conic-gradient(from 90deg, 
+        rgba(255, 100, 255, 0.1),
+        rgba(0, 200, 255, 0.2),
+        rgba(0, 255, 150, 0.15),
+        rgba(255, 100, 255, 0.1));
+      border-radius: 50%;
+      animation: spin-reverse 60s linear infinite, flicker 7s ease-in-out infinite;
+      filter: blur(120px);
+      z-index: 0;
+      pointer-events: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes spin-reverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    /* 内容容器，允许滚动 */
     .container {
+      position: relative;
+      z-index: 10;
       max-width: 800px;
       margin: 2em auto;
       padding: 0 1.5em;
+      background: transparent;
     }
 
     h1 {
@@ -90,15 +178,13 @@
       h1 {
         font-size: 8vw;
       }
-
-      .container {
-        padding: 0 1em;
-        margin: 1.5em auto;
-      }
     }
   </style>
 </head>
 <body>
+  <div class="sky" id="starfield"></div>
+  <div class="aurora"></div>
+  <div class="polaris"></div>
   <div class="container">
     <h1>Chongxi's HomePage</h1>
 
