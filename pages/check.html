@@ -108,7 +108,8 @@
     </div>
     <hr>
     <h2>请验证</h2>
-    <p>来自 北极星领航站 的消息:<br>北极点领航站正处于极地离子扰动活跃期。<br>为确保您的数据连接安全、稳定，我们将对链接进行抗干扰加固操作。<br>加固过程自动完成，若无法自动加固请手动进行，预计耗时 3~5 秒，完成后即可连接至领航站。</p>
+    <p>来自 北极星领航站 的讯息:<br>当前处于极地高能离子扰动活跃期。<br>为确保深空链路的稳定性，系统将执行连接抗干扰加固。<br>加固过程将自动完成，耗时约 3–5 秒。<br>如自动加固失败，请尝试手动执行领航线路校准。<br>稳定连接后，您将恢复对北极星主链的访问权限。
+</p>
 
     <div class="cf-turnstile"
          data-sitekey="0x4AAAAAABdyEn7n5dyYrx8t"
@@ -118,12 +119,20 @@
   </div>
 
   <script>
-    // Turnstile 验证成功回调
     function onTurnstileSuccess(token) {
-      // 通过验证，设置 cookie，期限 10m
-      document.cookie = "verified=1; path=/; max-age=" + 10 + "; SameSite=Lax";
-      // 跳转回首页
-      window.location.href = "https://chongxi.us/";
+  document.cookie = "verified=1; path=/; max-age=" + 600 + "; SameSite=Lax";
+
+  const container = document.querySelector('.container');
+  container.innerHTML = `
+    <h1>Polaris<br>北极星领航站</h1>
+    <p style="font-size:1.2em; color:#ccc; margin-top:2em;">
+      连接加固完成，正在接入主链，北极星领航站欢迎您。
+    </p>
+  `;
+
+  setTimeout(() => {
+    window.location.href = "https://chongxi.us/";
+  }, 3000); // 延迟 3 秒跳转
     }
   </script>
 </body>
