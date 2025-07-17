@@ -182,6 +182,27 @@
   </style>
 </head>
 <body>
+<!-- 开屏淡入语句 -->
+<div id="splash" style="
+  position: fixed;
+  z-index: 10000;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
+  font-family: 'Noto Serif SC', 'serif';
+  opacity: 1;
+  transition: opacity 2s ease;
+  pointer-events: none;
+">
+  Per Aspera Ad Astra
+  循此苦旅 直抵群星
+</div>
   <div class="container">
     <h1>Polaris<br>北极星领航站</h1>
   <div class="sky" id="starfield"></div>
@@ -292,6 +313,9 @@
         <span class="serv">[NW-iki]</span>
         <a href="https://onions.chongxi.us/">星のは庭</a>
       </div>
+      <div class="entry">
+        <span class="serv"[Now Playing]</span>
+        <a href="https://spot.chongxi.us/">当前Chongxi正在播放的内容</a>
     </div>
 
     <hr>
@@ -309,5 +333,14 @@
       <div><a href="blog/index.html">... view all</a></div>
     </div>
   </div>
+  <script>
+  setTimeout(() => {
+    const splash = document.getElementById('splash');
+    splash.style.opacity = 0;
+    setTimeout(() => {
+      splash.style.display = 'none';
+    }, 2000); // 与上方 transition 时间一致
+  }, 3000); // 显示时间：3秒
+</script>
 </body>
 </html>
